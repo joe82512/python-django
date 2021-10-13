@@ -1,0 +1,46 @@
+.c {
+    color: blue;
+}/*class*/
+
+#i_1 {
+    background-color: pink;
+}/*id*/
+
+
+
+.Group p {
+    color: red;
+}/*後代組合 紅色文字*/
+
+.Group > p {
+    font-style: italic;
+}/*子組合 文字斜體*/
+
+h2 ~ p {
+    background-color: lightyellow;
+}/*同層全體 背景淺黃*/
+
+h2 + p {
+    text-decoration: underline;
+}/*同層相鄰 加底線*/
+
+
+
+h2, h3, h4 {
+    color: green;
+}/*group*/
+
+
+a:visited {
+    color: red;
+}
+a:focus {
+    color: green;
+}
+a:hover {
+    color: blue;
+}
+
+a:hover::after {
+    content: "→";
+}
