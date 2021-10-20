@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head> <!--網頁資訊-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>table-demo</title>
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}"/>
+        <!-- Cover CSS -->
+        <link href="{% static 'css/table_info.css' %}" rel="stylesheet">
+    </head>
+    <body> <!--網頁內容-->
+        <div class="table_structure">
+            <table class="normal_table">
+                <tbody>
+                    <!--Travel-->
+                    <tr>
+                        <th>id_travel</th>
+                        <td> {{ info.id_travel }} </td>
+                    </tr>
+                    <tr>
+                        <th>target</th>
+                        <td> {{ info.target }} </td>
+                    </tr>
+                    <tr>
+                        <th>date</th>
+                        <td> {{ info.date }} </td>
+                    </tr>
+                    <tr>
+                        <th>time</th>
+                        <td> {{ info.time }} </td>
+                    </tr>
+                    <tr>
+                        <th>companion</th>
+                        <td> {{ info.companion }} </td>
+                    </tr>
+                    <!--Location-->
+                    <tr>
+                        <th>id_location</th>
+                        <td> {{ info.location }} </td>
+                    </tr>
+                    <tr>
+                        <th>country</th>
+                        <td> {{ info.location.country }} </td>
+                    </tr>
+                    <tr>
+                        <th>city</th>
+                        <td> {{ info.location.city }} </td>
+                    </tr>                
+                </tbody>
+            </table>
+        </div>        
+    </body>    
+</html>
