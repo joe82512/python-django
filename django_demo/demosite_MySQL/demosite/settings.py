@@ -87,7 +87,7 @@ DATABASES = { #modify
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'demo2', #schema名稱
         'USER': 'root',
-        'PASSWORD': 'INB_42870303',
+        'PASSWORD': '********',
         'HOST': 'localhost', #IP
         'PORT': '3306',
     }
