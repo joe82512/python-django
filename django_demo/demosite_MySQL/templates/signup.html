@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>sign up</title>
+{% endblock %}
+
+{% block MainHtml %}
+{% if messages %}
+    {% for msg in messages %}
+    <div class="alert {{msg.tags}}" role="alert">
+        {{ msg }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="data_sheet">
+    <form method="post">
+        {% csrf_token %}
+        <h1>sign up</h1>                   
+        {{ signup_form }}        
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block MainJs %} {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>create</title>
+{% endblock %}
+
+{% block MainHtml %}
+
+{% if messages %}
+    {% for msg in messages %}
+    <div class="alert {{msg.tags}}" role="alert">
+        {{ msg }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="data_sheet">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Create Location by Form</h2> 
+        {{ form }} 
+        <button type="submit" name="f">Create Form</button>
+    </form>
+</div>
+
+<div class="data_sheet">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Create Location by ModelForm</h2> 
+        {{ modelform }} 
+        <button type="submit" name="mf">Create ModelForm</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block MainJs %} {% endblock %}
