@@ -157,8 +157,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' #SMTP伺服器: 低安全應用程式存取權
 EMAIL_PORT = 587 #TLS通訊埠號
 EMAIL_USE_TLS = True #開啟TLS(傳輸層安全性)
-EMAIL_HOST_USER = 'INB.Auto.Email@gmail.com' #寄件者電子郵件
-EMAIL_HOST_PASSWORD = 'iwnwbhoivooczvxv' #Gmail應用程式的密碼
+EMAIL_HOST_USER = '********@gmail.com' #寄件者電子郵件
+EMAIL_HOST_PASSWORD = '********' #Gmail應用程式的密碼
 
 # login/logout
 LOGIN_REDIRECT_URL = '/list/'
