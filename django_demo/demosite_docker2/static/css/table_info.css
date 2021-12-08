@@ -1,0 +1,28 @@
+.table_structure {
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.normal_table {
+    width: 100%;
+    vertical-align: middle;
+    border-collapse: collapse; /*格線合併*/    
+}
+
+.normal_table th {
+    background-color: #3f72af;
+    color: #dbe2ef;
+    height: 40px;
+    width: 20%;
+    min-width: 150px;
+    text-align: center;
+    border: 1px solid #112d4e; /*邊框*/
+}
+
+.normal_table td {
+    width: 80%;
+    min-width: 150px;
+    border: 1px solid #112d4e; /*邊框*/
+    padding-left: 10px;
+}

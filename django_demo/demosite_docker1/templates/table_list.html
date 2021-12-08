@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>List</title>
+{% endblock %}
+
+{% block MainHtml %}
+<!--浮水印-->
+<div class="fixed">
+    {% load static %}
+    <img src="{% static 'img/bear.png' %}" alt="just bear"> 
+</div>
+
+<!--權限-->
+{% if perms.demo2.a2 %}
+    <div class="alert alert-info" role="alert">
+        權限不足，無法入詳細資料；權限a2請點擊
+        <a href="{% url 'info_demo_url' %}" class="alert-link">此處</a>
+        觀看範本
+    </div>    
+{% endif %}
+
+<!--bootstrap-->
+<div class="accordion data_sheet" id="accordion1">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Travel
+            </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show table_padding" aria-labelledby="panelsStayOpen-headingOne">                    
+            <!--表格 datatable-->
+            <table class="stripe" id="table1">
+                <thead>             
+                    <tr>
+                        <th class="min100px">ID</th>
+                        <th class="min100px">目標</th>
+                        <th class="min100px">同行</th>
+                        <th class="min100px">日期</th>
+                        <th class="min100px">地點</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in travels %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'info_url' t.id_travel %}" style="color: #3f72af; text-decoration: none">
+                                {{ t.id_travel }}
+                            </a>
+                        </td>
+                        <td>{{ t.target }}</td>
+                        <td>{{ t.companion }}</td>
+                        <td>{{ t.date }}</td>
+                        <td>{{ t.location.city }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>                    
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block MainJs %}
+<script type="text/javascript">
+    $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
+    //隨視窗縮放
+    $(window).resize(function () {
+        $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
+    });
+    //開啟時載入accordion預載, 才能隨視窗縮放 
+    $('.accordion').on('shown.bs.collapse', function(){
+        $.each($.fn.dataTable.tables(true), function(){
+            $(this).DataTable().columns.adjust();                
+        });
+    });
+    //datatable格式設定
+    $(function () {
+        $("#table1").DataTable({
+            columns: [ //預設寬度
+                { width: '20%' },
+                { width: '20%' },
+                { width: '20%' },
+                { width: '20%' },
+                { width: '20%' }
+            ],
+            stateSave: true, //狀態保存
+            pagingType: "numbers", //右下頁碼顯示型式
+            autoWidth: false, //取消寬度自訂
+            scrollX: true, //橫向卷軸
+            //searching: false, //關閉搜尋功能
+            pageLength: 10, //預設單頁多少筆資料
+            lengthMenu: [[2, 5, 10, -1], [2, 5, 10, "All"]], //預設單頁多少筆資料
+            oLanguage: { //修改顯示文字
+                sSearch: "搜尋 : ",
+                sLengthMenu: "每頁顯示 _MENU_ 筆資料",
+                sZeroRecords: "Sorry，找不到資料",
+                sInfo: "從 _START_ 到 _END_ /共 _TOTAL_ 筆資料",
+                sInfoEmpty: "沒有資料",
+                sInfoFiltered: "(從 _MAX_ 筆資料中搜尋)",
+                oPaginate: {
+                    sFirst: "首頁",
+                    sPrevious: "上一頁",
+                    sNext: "下一頁",
+                    sLast: "末頁"
+                },
+                sProcessing: "正在下載數據.....",
+                sZeroRecords: "沒有獲得資訊"
+            }
+        });
+    });
+</script>
+{% endblock %}
