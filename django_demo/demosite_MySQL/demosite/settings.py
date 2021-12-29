@@ -163,3 +163,7 @@ EMAIL_HOST_PASSWORD = '********' #Gmail應用程式的密碼
 # login/logout
 LOGIN_REDIRECT_URL = '/list/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Session
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True #瀏覽器關閉後登出
+SESSION_COOKIE_AGE = 60*60*24 #一天後重新登入
