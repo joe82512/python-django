@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: ./demosite
+      dockerfile: Dockerfile
+    image: django
+    container_name: django
+    hostname: django
+    restart: always
+    #command: python manage.py runserver 0.0.0.0:8000 --insecure
+    command: uwsgi --ini uwsgi.ini #use uwsgi
+    volumes:
+      - ./demosite:/demosite
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+
+  # create
+  nginx:
+      image: nginx
+      container_name: nginx
+      build: ./nginx
+      restart: always
+      volumes:
+        - ./demosite:/demosite
+        - ./log:/var/log/nginx
+      ports:
+        - "80:80"      
+      depends_on:
+        - django
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    restart: always
+    ports:
+      - 3308:3306 #3306 local used
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_HOST=localhost 
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=demo2
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=test123
+      - MYSQL_ROOT_PASSWORD=test123

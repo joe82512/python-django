@@ -1,0 +1,74 @@
+<!DOCTYPE html> <!--標記他是HTML5文件-->
+<html lang="zh-TW"> <!--預設語言-->
+    <head> <!--網頁資訊-->
+        <meta charset="UTF-8"> <!--編碼-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--瀏覽器的視窗-->
+        <title>&lt; 嘉義餐廳推薦 &gt;</title> <!--頁籤名稱-->
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'img/icon.ico' %}" type="image/x-icon"> <!--頁籤圖示-->        
+        <link href="{% static 'css/post.css' %}" rel="stylesheet"> <!--套用CSS-->
+    </head>
+    <body> <!--網頁內容-->
+        <header> <!--頁首-->
+            <h1>凡人居</h1> <!--不要重複h1-->
+            <a href="https://www.facebook.com/MibanTeppanyaki/" title="link to facebook">
+                米半鐵板燒
+            </a>
+            <a href="https://www.facebook.com/chengshihcurry/" title="link to facebook">
+                盛食咖哩
+            </a>
+            <a href="https://www.thefreen.com/" title="link to website">
+                樂檸漢堡
+            </a>        
+        </header>
+        
+        <main>            
+            <iframe width="720" height="480" src="https://www.youtube.com/embed/JGKRmE9nrOw" frameborder="0" allowfullscreen></iframe>
+            <p>
+                價位跟水準都偏高的中式簡餐店，有興趣可參考
+                <a href="https://www.facebook.com/FanRenJu/" title="link to facebook">
+                    Facebook 網頁
+                </a>
+                。
+            </p>
+
+            <div class="info">
+                <div>
+                    <h2>推薦菜單</h2><!--h依序往下-->
+                    <ol>
+                        <li>蘇造東坡肉</li>
+                        <li>糖醋松子魚</li>
+                        <li>蒙古炸奶豆腐</li>
+                    </ol>
+                </div>            
+                <div>
+                    <h2>商家資訊</h2>
+                    <ul>
+                        <li>地址: 600嘉義市西區仁愛一街43號</li>
+                        <li>電話: 05 236 4565</li>
+                        <li>營業時間: 平日 11:00~02:00, 16:30~20:00
+                            <br>&emsp;&emsp;&emsp;&emsp;&ensp;假日 11:00~02:00
+                        </li>
+                        <li>公休日: 每周二, 每周三</li>
+                    </ul>
+                </div>
+            </div>            
+            
+            <form>
+                <textarea id="text_message" required></textarea>
+                <input type="button" id="get_message" value="留言"></input>
+            </form>            
+            
+            <div id="board">
+                <!-- 插入javascript模板 -->
+            </div>
+        </main>        
+
+        <footer> <!--頁尾-->
+            <p>O△o 簡介HTML，順便推薦在地美食 o△O</p>
+        </footer>
+
+        <script src="{% static 'js/post.js' %}"></script>
+    </body>
+    
+</html>

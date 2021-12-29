@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Food</title>
+{% endblock %}
+
+{% block MainHtml %}
+<form method="post">
+    {% csrf_token %}
+    <!--bootstrap-->
+    <div class="input-group mt-5" style="width: 80%; margin: auto;">
+        <button class="btn btn-secondary" type="submit">關鍵字搜尋</button>
+        <input type="text" class="form-control" name="keywords" id="keywords" placeholder="食物、飲料或餐廳名稱" value="{{key}}">
+    </div>
+</form>
+<div id="couunt" style="width: 80%; margin: auto;"></div>
+
+<div class="mt-5 mb-5" style="width: 80%; margin: auto;">
+    <!--表格 datatable-->
+    <table class="stripe" id="table">
+        <thead>
+            <tr>
+                <th class="min100px">食物名稱</th>
+                <th class="min100px">總價格</th>
+                <th class="min100px">每份數量</th>
+                <th class="min100px">平均單價</th>
+                <th class="min100px">搭配飲料</th>
+                <th class="min100px">餐廳名稱</th>
+                <th class="min100px">餐廳地點</th>
+            </tr>
+        </thead>
+    </table>    
+</div>
+{% endblock %}
+
+{% block MainJs %}
+<script type="text/javascript">
+    $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
+    //隨視窗縮放
+    $(window).resize(function () {
+        $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
+    });
+
+    //django post 請求認證
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+    });
+
+    //datatable格式設定
+    $(function () {
+        $("#table").DataTable({
+            stateSave: true, //狀態保存
+            autoWidth: false, //取消寬度自訂
+            scrollX: true, //橫向卷軸
+            //searching: false, //關閉搜尋功能
+            deferRender: true, //分頁渲染
+
+            ajax: {
+                "url": "{% url 'data_ajax' %}",
+                "type": "POST",
+                "dataSrc": "",
+                "dataType": 'json',
+            },
+
+            columns: [
+                {data: 'name'},
+                {data: 'price'},
+                {data: 'quantity'},
+                {data: 'unit_price'},
+                {data: 'drink'},
+                {data: 'restaurant'},
+                {data: 'city'},
+            ],
+        });
+    });
+
+    //couunt ajax
+    $("#keywords").on('keyup change', function() {
+        let keywords = $(this).val();
+        $.ajax({
+            url: "{% url 'count_ajax' %}",
+            data: {"keywords": keywords},
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                $("#couunt").html("<p>data count : " + data.count + "</p>")
+            },
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,111 @@
+body {
+    margin: 0; /*排除邊框*/
+}
+
+header {
+    display: flex; /*一維橫向定位*/
+    justify-content: space-evenly; /*水平均分*/
+    align-items: center; /**/
+    background-color: #3f72af;
+}
+
+header h1,
+header a {
+    color: #dbe2ef;
+    width: 150px;
+    text-align: center;
+}
+
+header a {
+    text-decoration:none;
+}
+
+header a:hover {
+    cursor: pointer;
+    font-size: 28px;
+    opacity: 0.8;
+}
+
+main iframe {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+main p {
+    text-align: center;
+}
+
+main h2 {
+    color: #b7abfb;
+}
+
+main .info {    
+    display: flex; /*一維橫向定位*/
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #dbe2ef;
+    margin-top: 50px;
+}
+
+main .info div {
+    width: 400px;
+    margin: 10px;
+}
+
+footer p {
+    color: #112d4e;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    main iframe {
+        width: 80%;
+        height: 60vw;
+    }
+}
+
+form {
+    padding: 10px;
+}
+
+form textarea {
+    display: block;
+    width: 80%;
+    height: 20vw;
+    margin: auto;
+    margin-top: 10px;
+}
+
+form input {
+    display: block;    
+    margin: auto;
+    margin-top: 10px;
+}
+
+#board {
+    background-color: #D3D3D3;
+    
+}
+
+.sub_board {
+    width: 60%;
+    margin: auto;
+}
+
+.sub_board .a1 {
+    width: 90%;
+    text-align: left;
+    margin: auto;
+    padding: 10px;
+}
+
+.sub_board .a2 { 
+    width: 90%;
+    word-break: break-all;
+    text-align: left;
+    margin: auto;
+    padding: 5px;     
+}
