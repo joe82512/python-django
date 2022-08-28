@@ -372,15 +372,16 @@ def key_search(food, keyword_list):
     return f_idx
 
 def data_page(request):
-    global keys #for data_ajax
     if request.method == 'POST':
         keys = request.POST.get('keywords')
     else: #初始化
         keys = ''
+    request.session['keys'] = keys #for data_ajax
     return render(request, 'food_ajax.html', {'key':str(keys)})
 
 def data_ajax(request):
     if request.method == 'POST':
+        keys = request.POST.get('keys')
         food = Food.objects.none()
         if keys != '':
             keyword_list = keys.split() #空白分割

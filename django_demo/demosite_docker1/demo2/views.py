@@ -204,8 +204,9 @@ def signup(request):
             VerifyCode.objects.create(code=code, user=n1,)
 
             ### 寄信功能 by SMTP ###
+            host_ip = settings.ALLOWED_HOSTS[0]
             # 信件1: 純文字版(html失敗時替代)
-            code_url = 'http://'+'127.0.0.1:8000'+'/verification/?code='+code
+            code_url = 'http://'+host_ip+'/verification/?code='+code
             email_context = str(info['username'])+'，您好：\n註冊成功，\n請點擊連結啟用帳號，\n'+code_url+'\n連結將在10分鐘後失效。'    
             # 信件2: html版本
             html_content = '''
@@ -213,7 +214,7 @@ def signup(request):
                 <p>註冊成功，</p>
                 <p>請點擊<a href="http://{}/verification/?code={}">連結</a>啟用帳號，</p>
                 <p>連結將在10分鐘後失效。</p>
-                '''.format(str(info['username']), '127.0.0.1:8000', code)
+                '''.format(str(info['username']), host_ip, code)
             # 信件打包及設定
             email = EmailMultiAlternatives(
                 '<Django> 帳號驗證', #電子郵件標題
@@ -372,15 +373,16 @@ def key_search(food, keyword_list):
     return f_idx
 
 def data_page(request):
-    global keys #for data_ajax
     if request.method == 'POST':
         keys = request.POST.get('keywords')
     else: #初始化
         keys = ''
+    request.session['keys'] = keys #for data_ajax
     return render(request, 'food_ajax.html', {'key':str(keys)})
 
 def data_ajax(request):
     if request.method == 'POST':
+        keys = request.POST.get('keys')
         food = Food.objects.none()
         if keys != '':
             keyword_list = keys.split() #空白分割
